@@ -1,32 +1,3 @@
-
-/*MAIN*/
-module['exports'] = function imgBot (hook) {
-	var request = require('request');
-	var TOKEN = hook.env.echo_bot_key;
-	var ENDPOINT = 'https://api.telegram.org/bot' + TOKEN;
-  
-	var messageObj = hook.params.message;
-	
-	switch(messageObj.text)
-	{
-		case "/start":								
-				sendMessage(request, messageObj, "How to use: Reply a message using the command /retard as text.");
-		break;
-		case "/retard":
-			if(messageObj.reply_to_message)
-			{
-				sendRetardPicWithCaption(request, messageObj);
-			}
-			else
-			{
-				sendMessage(request, messageObj, "You need to reply to a message!")
-			}
-		break;
-	}
-}
-
-
-
 /*FUNCTIONS*/
 String.prototype.replaceAt=function(index, replacement) {
     return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
@@ -52,7 +23,7 @@ function sendRetardPicWithCaption(request, messageObj)
 	{
 		chat_id: messageObj.chat.id,
 		photo: request(photoURL), 
-		caption : retardAText("test"),
+		caption : retardAText(messageObj.reply_to_message.text),
 		reply_to_message_id : messageObj.reply_to_message.message_id
 	};
 	request.post(
@@ -70,4 +41,30 @@ function sendMessage(request, messageObj, text)
 	  "chat_id": messageObj.chat.id,
 	  "text": retardAText(text)
 	});
+}
+
+/*MAIN*/
+module['exports'] = function imgBot (hook) {
+	var request = require('request');
+	var TOKEN = hook.env.echo_bot_key;
+	var ENDPOINT = 'https://api.telegram.org/bot' + TOKEN;
+  
+	var messageObj = hook.params.message;
+	
+	switch(messageObj.text)
+	{
+		case "/start":								
+				sendMessage(request, messageObj, "How to use: Reply a message using the command /retard as text.");
+		break;
+		case "/retard":
+			if(messageObj.reply_to_message)
+			{
+				sendRetardPicWithCaption(request, messageObj);
+			}
+			else
+			{
+				sendMessage(request, messageObj, "You need to reply to a message!")
+			}
+		break;
+	}
 }
