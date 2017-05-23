@@ -35,19 +35,12 @@ module['exports'] = function imgBot (hook) {
 	
 	switch(message.text)
 	{
-		case "/start":				
+		case "/start":								
 				request
 				.post('https://api.telegram.org/bot' + hook.env.echo_bot_key + '/sendMessage')
 				.form({
 				  "chat_id": hook.params.message.chat.id,
-				  "text": retardAText("How to use:")
-				});
-				
-				request
-				.post('https://api.telegram.org/bot' + hook.env.echo_bot_key + '/sendMessage')
-				.form({
-				  "chat_id": hook.params.message.chat.id,
-				  "text": retardAText("Reply a message using the command /retard as text.")
+				  "text": retardAText("How to use: Reply a message using the command /retard as text.")
 				});
 				
 				
