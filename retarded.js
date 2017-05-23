@@ -34,16 +34,20 @@ module['exports'] = function imgBot (hook) {
 	var message = hook.params.message;
 	var from = message.chat.id;
 	
-	var photoURL = "http://i.imgur.com/uwlR640.jpg";
-	var formData = 
+	switch(message)
 	{
-		chat_id: from,
-		photo: request(photoURL), 
-		caption : retardAText(hook.params.message.text)
-	};
-	request.post(
-	{
-		url: ENDPOINT + '/sendPhoto',
-		formData: formData
-	});
+		case "/":
+		var photoURL = "http://i.imgur.com/uwlR640.jpg";
+		var formData = 
+		{
+			chat_id: from,
+			photo: request(photoURL), 
+			caption : retardAText(message.reply_to_message)
+		};
+		request.post(
+		{
+			url: ENDPOINT + '/sendPhoto',
+			formData: formData
+		});
+	}
 }
