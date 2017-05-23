@@ -38,8 +38,7 @@ module['exports'] = function imgBot (hook) {
     var photoURL = "http://i.imgur.com/uwlR640.jpg";
     var formData = {
       chat_id: from,
-      photo: request(photoURL), 
-	  text : retardAText(hook.params.message.text)
+      photo: request(photoURL)
     };
     request.post({
       url: ENDPOINT + '/sendPhoto',
