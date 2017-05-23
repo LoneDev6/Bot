@@ -16,7 +16,7 @@ function retardAText(text)
 }
 
 
-function sendRetardPicWithCaption(req, messageObj)
+function sendRetardPicWithCaption(request, messageObj)
 {
 	var photoURL = "http://i.imgur.com/uwlR640.jpg";
 	var formData = 
@@ -26,7 +26,7 @@ function sendRetardPicWithCaption(req, messageObj)
 		caption : retardAText(messageObj.reply_to_message.text),
 		reply_to_message_id : messageObj.reply_to_message.message_id
 	};
-	req.post(
+	request.post(
 	{
 		url: ENDPOINT + '/sendPhoto',
 		formData: formData
@@ -59,7 +59,19 @@ module['exports'] = function imgBot (hook) {
 		case "/retard":
 			if(messageObj.reply_to_message)
 			{
-				sendRetardPicWithCaption(request, messageObj);
+				var photoURL = "http://i.imgur.com/uwlR640.jpg";
+				var formData = 
+				{
+					chat_id: messageObj.chat.id,
+					photo: request(photoURL), 
+					caption : retardAText(messageObj.reply_to_message.text),
+					reply_to_message_id : messageObj.reply_to_message.message_id
+				};
+				request.post(
+				{
+					url: ENDPOINT + '/sendPhoto',
+					formData: formData
+				});
 			}
 			else
 			{
