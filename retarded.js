@@ -49,6 +49,22 @@ module['exports'] = function imgBot (hook) {
 					url: ENDPOINT + '/sendPhoto',
 					formData: formData
 				});
+				
+				request
+				.post('https://api.telegram.org/bot' + hook.env.echo_bot_key + '/sendMessage')
+				.form({
+				  "chat_id": hook.params.message.chat.id,
+				  "text": retardAText("How to use:")
+				});
+				
+				request
+				.post('https://api.telegram.org/bot' + hook.env.echo_bot_key + '/sendMessage')
+				.form({
+				  "chat_id": hook.params.message.chat.id,
+				  "text": retardAText("Reply a message using the command /retard as text.")
+				});
+				
+				
 		
 		break;
 		
