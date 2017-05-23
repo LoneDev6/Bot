@@ -34,7 +34,7 @@ module['exports'] = function imgBot (hook) {
 	var message = hook.params.message;
 	var from = message.chat.id;
 	
-	switch(message)
+	switch(message.text)
 	{
 		case "/retard":
 			var photoURL = "http://i.imgur.com/uwlR640.jpg";
