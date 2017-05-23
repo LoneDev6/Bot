@@ -39,7 +39,7 @@ module['exports'] = function imgBot (hook) {
     var formData = {
       chat_id: from,
       photo: request(photoURL), 
-	  text : retardAText(hook.params.message.text)
+	  caption : retardAText(hook.params.message.text)
     };
     request.post({
       url: ENDPOINT + '/sendPhoto',
