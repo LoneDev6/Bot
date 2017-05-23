@@ -14,7 +14,7 @@ function retardAText(text)
   return text;  
 }
 
-module['exports'] = function echoBot (hook) {
+/*module['exports'] = function echoBot (hook) {
   var request = require('request');
   request
     .post('https://api.telegram.org/bot' + hook.env.echo_bot_key + '/sendMessage')
@@ -22,7 +22,28 @@ module['exports'] = function echoBot (hook) {
       "chat_id": hook.params.message.chat.id,
       "text": retardAText(hook.params.message.text)
     });
-};
+};*/
 
 
 
+module['exports'] = function imgBot (hook) {
+  var request = require('request');
+  var TOKEN = hook.env.bot_key;
+  var ENDPOINT = 'https://api.telegram.org/bot' + TOKEN;
+  
+  var message = hook.params.message;
+  var from = message.chat.id;
+  	
+  if (message.text == "/img") {
+    var photoURL = "http://i.imgur.com/uwlR640.jpg";
+    var formData = {
+      chat_id: from,
+      photo: request(photoURL), 
+	  text : retardAText(hook.params.message.text)
+    };
+    request.post({
+      url: ENDPOINT + '/sendPhoto',
+      formData: formData
+    });
+  }
+}
