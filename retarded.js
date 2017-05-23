@@ -16,7 +16,7 @@ function retardAText(text)
 }
 
 
-function sendRetardPicWithCaption(request, messageObj)
+function sendRetardPicWithCaption(req, messageObj)
 {
 	var photoURL = "http://i.imgur.com/uwlR640.jpg";
 	var formData = 
@@ -26,7 +26,7 @@ function sendRetardPicWithCaption(request, messageObj)
 		caption : retardAText(messageObj.reply_to_message.text),
 		reply_to_message_id : messageObj.reply_to_message.message_id
 	};
-	request.post(
+	req.post(
 	{
 		url: ENDPOINT + '/sendPhoto',
 		formData: formData
