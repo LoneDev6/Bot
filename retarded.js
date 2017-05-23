@@ -27,23 +27,23 @@ function retardAText(text)
 
 
 module['exports'] = function imgBot (hook) {
-  var request = require('request');
-  var TOKEN = hook.env.echo_bot_key;
-  var ENDPOINT = 'https://api.telegram.org/bot' + TOKEN;
+	var request = require('request');
+	var TOKEN = hook.env.echo_bot_key;
+	var ENDPOINT = 'https://api.telegram.org/bot' + TOKEN;
   
-  var message = hook.params.message;
-  var from = message.chat.id;
-  	
-  if (message.text == "/img") {
-    var photoURL = "http://i.imgur.com/uwlR640.jpg";
-    var formData = {
-      chat_id: from,
-      photo: request(photoURL), 
-	  caption : retardAText(hook.params.message.text)
-    };
-    request.post({
-      url: ENDPOINT + '/sendPhoto',
-      formData: formData
-    });
-  }
+	var message = hook.params.message;
+	var from = message.chat.id;
+	
+	var photoURL = "http://i.imgur.com/uwlR640.jpg";
+	var formData = 
+	{
+		chat_id: from,
+		photo: request(photoURL), 
+		caption : retardAText(hook.params.message.text)
+	};
+	request.post(
+	{
+		url: ENDPOINT + '/sendPhoto',
+		formData: formData
+	});
 }
