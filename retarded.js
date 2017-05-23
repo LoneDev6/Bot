@@ -32,24 +32,34 @@ module['exports'] = function imgBot (hook) {
 	var ENDPOINT = 'https://api.telegram.org/bot' + TOKEN;
   
 	var message = hook.params.message;
-	var from = message.chat.id;
 	
 	switch(message.text)
 	{
 		case "/retard":
-			var photoURL = "http://i.imgur.com/uwlR640.jpg";
-			var formData = 
+			if(message.reply_to_message)
 			{
-				chat_id: from,
-				photo: request(photoURL), 
-				caption : retardAText(message.reply_to_message.text)
-			};
-			request.post(
+				var photoURL = "http://i.imgur.com/uwlR640.jpg";
+				var formData = 
+				{
+					chat_id: message.chat.id,
+					photo: request(photoURL), 
+					caption : retardAText(message.reply_to_message.text)
+				};
+				request.post(
+				{
+					url: ENDPOINT + '/sendPhoto',
+					formData: formData
+				});
+			}
+			else
 			{
-				url: ENDPOINT + '/sendPhoto',
-				formData: formData
-			});
-		
+				request
+				.post('https://api.telegram.org/bot' + hook.env.echo_bot_key + '/sendMessage')
+				.form({
+				  "chat_id": hook.params.message.chat.id,
+				  "text": retardAText("You need to reply to a message!")
+				});
+			}
 		break;
 	}
 }
