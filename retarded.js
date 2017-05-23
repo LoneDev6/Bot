@@ -52,7 +52,7 @@ function sendRetardPicWithCaption(request, messageObj)
 	{
 		chat_id: messageObj.chat.id,
 		photo: request(photoURL), 
-		caption : retardAText(messageObj.reply_to_message.text),
+		caption : retardAText("test"),
 		reply_to_message_id : messageObj.reply_to_message.message_id
 	};
 	request.post(
