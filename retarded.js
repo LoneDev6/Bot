@@ -34,10 +34,9 @@ module['exports'] = function imgBot (hook) {
 	var message = hook.params.message;
 	var from = message.chat.id;
 	
-	switch(message.text)
+	if(message.entities[0].type == "bot_command" && message.entities[0] == "/retard")
 	{
-		case "/retard":
-			var photoURL = "http://i.imgur.com/uwlR640.jpg";
+		var photoURL = "http://i.imgur.com/uwlR640.jpg";
 			var formData = 
 			{
 				chat_id: from,
@@ -49,7 +48,5 @@ module['exports'] = function imgBot (hook) {
 				url: ENDPOINT + '/sendPhoto',
 				formData: formData
 			});
-		
-		break;
 	}
 }
