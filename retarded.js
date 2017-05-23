@@ -43,7 +43,8 @@ module['exports'] = function imgBot (hook) {
 				{
 					chat_id: message.chat.id,
 					photo: request(photoURL), 
-					caption : retardAText(message.reply_to_message.text)
+					caption : retardAText(message.reply_to_message.text),
+					reply_to_message_id : message.id
 				};
 				request.post(
 				{
