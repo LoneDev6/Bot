@@ -36,18 +36,20 @@ module['exports'] = function imgBot (hook) {
 	
 	switch(message)
 	{
-		case "/":
-		var photoURL = "http://i.imgur.com/uwlR640.jpg";
-		var formData = 
-		{
-			chat_id: from,
-			photo: request(photoURL), 
-			caption : retardAText(message.reply_to_message)
-		};
-		request.post(
-		{
-			url: ENDPOINT + '/sendPhoto',
-			formData: formData
-		});
+		case "/retard":
+			var photoURL = "http://i.imgur.com/uwlR640.jpg";
+			var formData = 
+			{
+				chat_id: from,
+				photo: request(photoURL), 
+				caption : retardAText(message.reply_to_message)
+			};
+			request.post(
+			{
+				url: ENDPOINT + '/sendPhoto',
+				formData: formData
+			});
+		
+		break;
 	}
 }
