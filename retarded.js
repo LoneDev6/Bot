@@ -35,7 +35,7 @@ module['exports'] = function imgBot (hook) {
 	
 	switch(message.text)
 	{
-		case "/retard":
+		case "/start":
 			request
 				.post('https://api.telegram.org/bot' + hook.env.echo_bot_key + '/sendMessage')
 				.form({
