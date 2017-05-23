@@ -36,11 +36,18 @@ module['exports'] = function imgBot (hook) {
 	switch(message.text)
 	{
 		case "/start":
-			request
-				.post('https://api.telegram.org/bot' + hook.env.echo_bot_key + '/sendMessage')
-				.form({
-				  "chat_id": hook.params.message.chat.id,
-				  "text": retardAText("/start")
+				var photoURL = "http://i.imgur.com/uwlR640.jpg";
+				var formData = 
+				{
+					chat_id: message.chat.id,
+					photo: request(photoURL), 
+					caption : retardAText("/start"),
+					reply_to_message_id : message.reply_to_message.message_id
+				};
+				request.post(
+				{
+					url: ENDPOINT + '/sendPhoto',
+					formData: formData
 				});
 		
 		break;
