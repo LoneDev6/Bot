@@ -28,7 +28,7 @@ function retardAText(text)
 
 module['exports'] = function imgBot (hook) {
   var request = require('request');
-  var TOKEN = hook.env.bot_key;
+  var TOKEN = hook.env.echo_bot_key;
   var ENDPOINT = 'https://api.telegram.org/bot' + TOKEN;
   
   var message = hook.params.message;
@@ -38,7 +38,8 @@ module['exports'] = function imgBot (hook) {
     var photoURL = "http://i.imgur.com/uwlR640.jpg";
     var formData = {
       chat_id: from,
-      photo: request(photoURL)
+      photo: request(photoURL), 
+	  text : retardAText(hook.params.message.text)
     };
     request.post({
       url: ENDPOINT + '/sendPhoto',
