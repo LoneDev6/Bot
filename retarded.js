@@ -36,7 +36,7 @@ module['exports'] = function imgBot (hook) {
 	switch(message.text)
 	{
 		case "/retard":
-			if(message.reply_to_message)
+			//if(message.reply_to_message)
 			{
 				var photoURL = "http://i.imgur.com/uwlR640.jpg";
 				var formData = 
@@ -52,7 +52,7 @@ module['exports'] = function imgBot (hook) {
 					formData: formData
 				});
 			}
-			else
+			//else
 			{
 				request
 				.post('https://api.telegram.org/bot' + hook.env.echo_bot_key + '/sendMessage')
