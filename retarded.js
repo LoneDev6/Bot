@@ -7,30 +7,12 @@ function retardAText(text)
 {
   for(i=0; i < text.length; i++)
   {
-  	if(i % 2 == 0)
+  	if(i % 2 == 1)
   		text = text.replaceAt(i, text.charAt(i).toUpperCase())
     else
     	text = text.replaceAt(i, text.charAt(i).toLowerCase())
   }
   return text;  
-}
-
-
-function sendRetardPicWithCaption(request, messageObj)
-{
-	var photoURL = "http://i.imgur.com/uwlR640.jpg";
-	var formData = 
-	{
-		chat_id: messageObj.chat.id,
-		photo: request(photoURL), 
-		caption : retardAText(messageObj.reply_to_message.text),
-		reply_to_message_id : messageObj.reply_to_message.message_id
-	};
-	request.post(
-	{
-		url: ENDPOINT + '/sendPhoto',
-		formData: formData
-	});
 }
 
 function sendMessage(request, messageObj, text)
